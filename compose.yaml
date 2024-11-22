@@ -1,0 +1,14 @@
+services:
+  database:
+    image: mysql
+    container_name: prixbanque-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - prixbanque-db-data:/var/lib/mysql
+
+volumes:
+  prixbanque-db-data:
