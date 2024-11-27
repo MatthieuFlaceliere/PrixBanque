@@ -3,6 +3,7 @@ package com.prixbanque.account_service.controller;
 import com.prixbanque.account_service.dto.AccountDTO;
 import com.prixbanque.account_service.dto.CreateAccountDTO;
 import com.prixbanque.account_service.dto.UpdateAccountDTO;
+import com.prixbanque.account_service.dto.UpdateBalanceDTO;
 import com.prixbanque.account_service.service.AccountService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -54,6 +55,15 @@ public class AccountController {
         AccountDTO account = accountService.update(id, updateAccountDTO);
 
         return ResponseEntity.ok(account);
+    }
+
+    @PutMapping("/{id}/balance")
+    public ResponseEntity<AccountDTO> updateBalance(
+            @PathVariable @NotNull Long id,
+            @RequestBody @Valid UpdateBalanceDTO updateBalanceDTO) {
+        accountService.updateBalance(id, updateBalanceDTO);
+
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")

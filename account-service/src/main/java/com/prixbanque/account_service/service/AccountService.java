@@ -3,6 +3,7 @@ package com.prixbanque.account_service.service;
 import com.prixbanque.account_service.dto.AccountDTO;
 import com.prixbanque.account_service.dto.CreateAccountDTO;
 import com.prixbanque.account_service.dto.UpdateAccountDTO;
+import com.prixbanque.account_service.dto.UpdateBalanceDTO;
 import com.prixbanque.account_service.model.Account;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -49,5 +50,14 @@ public class AccountService {
 
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    public void updateBalance(Long id, UpdateBalanceDTO balance) {
+        BigDecimal newBalance = balance.getBalance();
+
+        Account account = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Account not found"));
+        account.setBalance(newBalance);
+        repository.save(account);
     }
 }

@@ -7,7 +7,7 @@ CREATE TABLE accounts
     phone     VARCHAR(255)          NOT NULL,
     nas       VARCHAR(255)          NOT NULL,
     password  VARCHAR(255)          NOT NULL,
-    balance   DECIMAL               NOT NULL,
+    balance   DECIMAL(19, 2)        NOT NULL,
     CONSTRAINT pk_accounts PRIMARY KEY (id)
 );
 

@@ -20,10 +20,10 @@ public class Transaction {
     private Long id;
 
     @Column(nullable = false)
-    private String senderAccount;
+    private Long senderAccount;
 
     @Column(nullable = false)
-    private String receiverAccount;
+    private Long receiverAccount;
 
     @Column(nullable = false)
     private BigDecimal amount;
