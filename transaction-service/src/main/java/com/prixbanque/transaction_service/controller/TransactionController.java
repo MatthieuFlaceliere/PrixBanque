@@ -4,6 +4,7 @@ import com.prixbanque.transaction_service.dto.CreateTransactionDTO;
 import com.prixbanque.transaction_service.dto.TransactionDTO;
 import com.prixbanque.transaction_service.dto.UpdateTransactionDTO;
 import com.prixbanque.transaction_service.service.TransactionService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,10 +39,11 @@ public class TransactionController {
     }
 
     @PostMapping
+    @CircuitBreaker(name = "createTransaction", fallbackMethod = "")
     public ResponseEntity<TransactionDTO> create(
             @Valid @RequestBody CreateTransactionDTO transactionDTO,
             UriComponentsBuilder uriBuilder) {
-        TransactionDTO transaction = transactionService.save(transactionDTO);
+        TransactionDTO transaction = transactionService.processTransaction(transactionDTO);
         URI uri = uriBuilder.path("/transactions/{id}").buildAndExpand(transaction.getId()).toUri();
 
         return ResponseEntity.created(uri).body(transaction);
