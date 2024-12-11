@@ -14,3 +14,9 @@ Lancer les services dans l'ordre suivant:
 - `account-service`
 - `transaction-service`
 - `invoice-service`
+
+### Démo
+
+![Video](./assets/video1.gif)
+![Video1](./assets/video2.gif)
+![Image](./assets/image.png)

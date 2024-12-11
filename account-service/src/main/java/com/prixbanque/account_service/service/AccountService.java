@@ -55,9 +55,11 @@ public class AccountService {
     public void updateBalance(Long id, UpdateBalanceDTO balance) {
         BigDecimal newBalance = balance.getBalance();
 
-        Account account = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Account not found"));
-        account.setBalance(newBalance);
-        repository.save(account);
+//        Account account = repository.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException("Account not found"));
+//        account.setBalance(newBalance);
+//        repository.save(account);
+
+        repository.setAccountBalance(newBalance, id);
     }
 }
